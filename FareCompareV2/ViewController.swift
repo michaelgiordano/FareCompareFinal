@@ -33,13 +33,12 @@ class ViewController: UIViewController {
             product, response in
             if let productID = product?.productID { //check if the productID exists
                 builder.setProductID(productID)
-                elf.button.rideParameters = builder.build()
+                self.button.rideParameters = builder.build()
                 
                 // show estimate in the button
                 self.button.loadRideInformation()
             }
         })
-        
         
         // center the button (optional)
         button.sizeToFit()
