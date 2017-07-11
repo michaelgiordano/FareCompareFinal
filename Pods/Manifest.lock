@@ -1,9 +1,11 @@
 PODS:
+  - Alamofire (4.5.0)
   - ObjectMapper (2.2.7)
   - UberRides (0.7.0):
     - ObjectMapper (~> 2.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.4)
   - UberRides (from `https://github.com/uber/rides-ios-sdk.git`, branch `swift-3-dev`)
 
 EXTERNAL SOURCES:
@@ -17,9 +19,10 @@ CHECKOUT OPTIONS:
     :git: https://github.com/uber/rides-ios-sdk.git
 
 SPEC CHECKSUMS:
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
   ObjectMapper: 65abcfd9a61cf7396cbd14a4fb22fddfcc46577e
   UberRides: 796f4335121c2c8223985329c6979a452edfe083
 
-PODFILE CHECKSUM: 3d10adc2af9d96594e2a20f99787fb78ac720368
+PODFILE CHECKSUM: 3abe3c080852a06f7f7dee46e28d7adb6bb9bc2e
 
 COCOAPODS: 1.2.1
