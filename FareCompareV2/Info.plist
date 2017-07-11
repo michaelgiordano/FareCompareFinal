@@ -28,11 +28,33 @@
 	<array>
 		<string>armv7</string>
 	</array>
+    
+    
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>uber</string>
+        <string>uberauth</string>
+    </array>
+    <key>UberClientID</key>
+    <string>C1hQRMfPG-gzzlSCQhxcRhbUPsph59GU</string>
+    <key>UberServerToken</key>
+    <string>PxtTExlVkXCfJcsrCsCagaLvQs6j54LLm-UZrVMR</string>
+    <key>UberDisplayName</key>
+    <string>FareCompare</string>
+    <key>UberCallbackURIs</key>
+    <array>
+        <dict>
+            <key>UberCallbackURIType</key>
+            <string>General</string>
+            <key>URIString</key>
+            <string>localhost</string>
+        </dict>
+    </array>
 </dict>
 </plist>
