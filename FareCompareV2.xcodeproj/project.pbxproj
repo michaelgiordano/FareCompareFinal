@@ -242,7 +242,7 @@
 				TargetAttributes = {
 					3B55EEAE1F14078B0010633A = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = EVD2YC5LB3;
+						DevelopmentTeam = K47CUGM2AK;
 						ProvisioningStyle = Automatic;
 					};
 					3B55EEC21F14078B0010633A = {
@@ -601,11 +601,13 @@
 			baseConfigurationReference = 8B87E8B122BB38086E49DE37 /* Pods-FareCompareV2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = EVD2YC5LB3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = K47CUGM2AK;
 				INFOPLIST_FILE = FareCompareV2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cipher.FareCompareV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -615,11 +617,13 @@
 			baseConfigurationReference = 50C0E19063FCC7485A105C93 /* Pods-FareCompareV2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = EVD2YC5LB3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = K47CUGM2AK;
 				INFOPLIST_FILE = FareCompareV2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cipher.FareCompareV2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

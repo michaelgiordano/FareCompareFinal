@@ -12,39 +12,49 @@ import CoreLocation
 
 class ViewController: UIViewController {
     
-    let scopes: [RidesScope] = [.Profile, .Places, .Request]
-    let loginManager = LoginManager(loginType: .native)
-
-    let button = RideRequestButton()
     let ridesClient = RidesClient()
-    let pickupLocation = CLLocation(latitude: 37.787654, longitude: -122.402760)
-    let dropoffLocation = CLLocation(latitude: 37.775200, longitude: -122.417587)
-    let dropoffNickname = "Work"
-
+    let button = RideRequestButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let loginButton : LoginButton = LoginButton(frame: CGRect.zero, scopes: scopes, loginManager: loginManager)
-        var builder = RideParametersBuilder().setPickupLocation(pickupLocation).setDropoffLocation(dropoffLocation, nickname: dropoffNickname)
+        //button.delegate = self
+        let pickupLocation = CLLocation(latitude: 37.775159, longitude: -122.417907)
+        let dropoffLocation = CLLocation(latitude: 37.6213129, longitude: -122.3789554)
         
-        // Do any additional setup after loading the view, typically from a nib.
-        loginButton.presentingViewController = self
-        loginButton.delegate = self as? LoginButtonDelegate
-        view.addSubview(loginButton)
+        //make sure that the pickupLocation and dropoffLocation is set in the Deeplink
+        let builder = RideParametersBuilder()
+            .setPickupLocation(pickupLocation)
+            // nickname or address is required to properly display destination on the Uber App
+            .setDropoffLocation(dropoffLocation,
+                                nickname: "San Francisco International Airport")
+        
+        // use the same pickupLocation to get the estimate
         ridesClient.fetchCheapestProduct(pickupLocation: pickupLocation, completion: {
             product, response in
-            if let productID = product?.productID {
-                builder = builder.setProductID(productID)
+            if let productID = product?.productID { //check if the productID exists
+                builder.setProductID(productID)
                 self.button.rideParameters = builder.build()
-                print(self.button.rideParameters)
+                
+                // show estimate in the button
                 self.button.loadRideInformation()
-                print(self.button.loadRideInformation())
             }
         })
-    }
-
+        
+        
+        // center the button (optional)
+        button.sizeToFit()
+        button.center = view.center
+        
+        //put the button in the view
+        view.addSubview(button)    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func rideRequestButtonDidLoadRideInformation(button: RideRequestButton) {
+        button.sizeToFit()
+        button.center = view.center
     }
     
     // Swift
@@ -52,17 +62,7 @@ class ViewController: UIViewController {
     
     // Mark: LoginButtonDelegate
     
-    public func loginButton(button: LoginButton, didLogoutWithSuccess success: Bool) {
-        // success is true if logout succeeded, false otherwise
-    }
-    
-    public func loginButton(button: LoginButton, didCompleteLoginWithToken accessToken: AccessToken?, error: NSError?) {
-        if let _ = accessToken {
-            // AccessToken Saved
-        } else if let error = error {
-            // An error occured
-        }
-    }
+ 
 
 
 }
