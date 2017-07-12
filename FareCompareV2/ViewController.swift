@@ -42,12 +42,18 @@ class ViewController: UIViewController {
          //   if let json = response.result.value {
 
                 var totalEstimates = [Int]()
+                //let theData = response.result.value as! JSON
+                self.parse(json: JSON(response.result.value!))
+                /*
                 do
                 {
-                    if let theData = response.result.value as? Data,
-                        let json = try JSONSerialization.jsonObject(with: theData) as? [String: Any],
-                        let rides = json["estimate"] as? [[String: Any]]
-                    {
+                    if let theData = response.result.value as! Data {
+                        print("theData converted to type 'Data'")
+                    if let json = try JSONSerialization.jsonObject(with: theData) as? [String: Any] {
+                        print("theData deserialized with JSONObject as [String:Any]")
+                    if let rides = json["estimate"] as? [[String: Any]] {
+                        print("ride estimate taken out of json")
+                    //{
                         print("theData was deserialized from JSON to Swift")
                         print("theData: \(theData)")
                         for ride in rides
@@ -62,6 +68,9 @@ class ViewController: UIViewController {
                                 print("ERROR: failed to read estimate")
                             }
                         }
+                        
+                    }
+                    }
                     }
                     else
                     {
@@ -73,6 +82,7 @@ class ViewController: UIViewController {
                     print("Error deserializing JSON: \(error)")
                 }
                 print("totalEstimates: \(totalEstimates)")
+                */
 //                print("JSON: \(json)[0]['estimate']") // serialized json response
 //                print(json)
             }
@@ -114,6 +124,16 @@ class ViewController: UIViewController {
     func rideRequestButtonDidLoadRideInformation(button: RideRequestButton) {
         button.sizeToFit()
         button.center = view.center
+    }
+    
+    func parse(json: JSON)
+    {
+        print("parse called")
+        for ride in json["times"].arrayValue
+        {
+            let estimateDisplayName = ride["display_name"]
+            print(estimateDisplayName)
+        }
     }
     
     // Swift
