@@ -21,19 +21,24 @@ class ViewController: UIViewController {
         //button.delegate = self
         
         let parameters: Parameters = [
-            "Authorization": "Token PxtTExlVkXCfJcsrCsCagaLvQs6j54LLm-UZrVMR",
-            "Accept-Language": "en_US",
-            "Content-Type": "application/json"
+            "start_latitude": "37.7752315",
+            "start_longitude": "-122.418075",
         ]
         
-            Alamofire.request("https://api.uber.com/v1.2/estimates/price?start_latitude=37.7752315&start_longitude=-122.418075&end_latitude=37.7752415&end_longitude=-122.518075",
-                              method: .post,
+        let headers: HTTPHeaders = [
+            "Authorization": "Token PxtTExlVkXCfJcsrCsCagaLvQs6j54LLm-UZrVMR",
+            "Accept-Language": "en_US",
+            "Content-Type" : "application/json"
+        ]
+        
+           let request = Alamofire.request("https://api.uber.com/v1.2/estimates/time",
                               parameters: parameters,
-                              encoding: URLEncoding(destination: .queryString)).responseJSON { response in
+                              encoding: URLEncoding(destination: .queryString),
+                              headers: headers).responseJSON { response in
             print("Request: \(String(describing: response.request))")   // original url request
             print("Response: \(String(describing: response.response))") // http url response
             print("Result: \(response.result)")                         // response serialization result
-            
+        
             if let json = response.result.value {
                 print("JSON: \(json)") // serialized json response
             }
@@ -41,7 +46,6 @@ class ViewController: UIViewController {
             if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
                 print("Data: \(utf8Text)") // original server data as UTF8 string
             }
-        }
         
 //        let pickupLocation = CLLocation(latitude: 37.775159, longitude: -122.417907)
 //        let dropoffLocation = CLLocation(latitude: 37.6213129, longitude: -122.3789554)
@@ -88,3 +92,4 @@ class ViewController: UIViewController {
 
 }
 
+}
