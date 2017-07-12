@@ -42,23 +42,37 @@ class ViewController: UIViewController {
          //   if let json = response.result.value {
 
                 var totalEstimates = [Int]()
-                
-                do {
-                    if let data = response.result.value,
-                        let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                        let rides = json["estimate"] as? [[String: Any]] {
-                        for ride in rides {
-                            if let estimate = ride["estimate"] as? Int {
-                                print(estimate)
+                do
+                {
+                    if let theData = response.result.value as? Data,
+                        let json = try JSONSerialization.jsonObject(with: theData) as? [String: Any],
+                        let rides = json["estimate"] as? [[String: Any]]
+                    {
+                        print("theData was deserialized from JSON to Swift")
+                        print("theData: \(theData)")
+                        for ride in rides
+                        {
+                            if let estimate = ride["estimate"] as? Int
+                            {
+                                print("Estimate: \(estimate)")
                                 totalEstimates.append(estimate)
+                            }
+                            else
+                            {
+                                print("ERROR: failed to read estimate")
                             }
                         }
                     }
-                } catch {
+                    else
+                    {
+                        print("ERROR: theData was NOT deserialized")
+                    }
+                }
+                catch
+                {
                     print("Error deserializing JSON: \(error)")
                 }
-                
-              print(totalEstimates)
+                print("totalEstimates: \(totalEstimates)")
 //                print("JSON: \(json)[0]['estimate']") // serialized json response
 //                print(json)
             }
