@@ -39,14 +39,34 @@ class ViewController: UIViewController {
             print("Response: \(String(describing: response.response))") // http url response
             print("Result: \(response.result)")                         // response serialization result
         
-            if let json = response.result.value {
-                print("JSON: \(json)") // serialized json response
+         //   if let json = response.result.value {
+
+                var totalEstimates = [Int]()
+                
+                do {
+                    if let data = response.result.value,
+                        let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                        let rides = json["estimate"] as? [[String: Any]] {
+                        for ride in rides {
+                            if let estimate = ride["estimate"] as? Int {
+                                print(estimate)
+                                totalEstimates.append(estimate)
+                            }
+                        }
+                    }
+                } catch {
+                    print("Error deserializing JSON: \(error)")
+                }
+                
+              print(totalEstimates)
+//                print("JSON: \(json)[0]['estimate']") // serialized json response
+//                print(json)
             }
             
-            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-                print("Data: \(utf8Text)") // original server data as UTF8 string
-            }
-        
+//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                print("Data: \(utf8Text)") // original server data as UTF8 string
+//            }
+//        
 //        let pickupLocation = CLLocation(latitude: 37.775159, longitude: -122.417907)
 //        let dropoffLocation = CLLocation(latitude: 37.6213129, longitude: -122.3789554)
 //        
@@ -92,4 +112,4 @@ class ViewController: UIViewController {
 
 }
 
-}
+
