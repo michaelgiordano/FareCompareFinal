@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1A7A4B4565215AD5423265C6 /* Pods_FareCompareV2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE02A92F89FDB7E85549C68 /* Pods_FareCompareV2UITests.framework */; };
 		3043EF5DCE0A76502DC0E654 /* Pods_FareCompareV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4360A856BD9F4BCAFE16973 /* Pods_FareCompareV2.framework */; };
+		3B3C75871F1697990059BBB0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3C75861F1697990059BBB0 /* SwiftyJSON.swift */; };
 		3B55EEB31F14078B0010633A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55EEB21F14078B0010633A /* AppDelegate.swift */; };
 		3B55EEB51F14078B0010633A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55EEB41F14078B0010633A /* ViewController.swift */; };
 		3B55EEB81F14078B0010633A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B55EEB61F14078B0010633A /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		2DBDFD56347C148CF1530D82 /* Pods_FareCompareV2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FareCompareV2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B3C75861F1697990059BBB0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../../Downloads/SwiftyJSON-master/Source/SwiftyJSON.swift"; sourceTree = "<group>"; };
 		3B55EEAF1F14078B0010633A /* FareCompareV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FareCompareV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B55EEB21F14078B0010633A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B55EEB41F14078B0010633A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				3B55EEB91F14078B0010633A /* Assets.xcassets */,
 				3B55EEBB1F14078B0010633A /* LaunchScreen.storyboard */,
 				3B55EEBE1F14078B0010633A /* Info.plist */,
+				3B3C75861F1697990059BBB0 /* SwiftyJSON.swift */,
 			);
 			path = FareCompareV2;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B3C75871F1697990059BBB0 /* SwiftyJSON.swift in Sources */,
 				3B55EEB51F14078B0010633A /* ViewController.swift in Sources */,
 				3B55EEB31F14078B0010633A /* AppDelegate.swift in Sources */,
 			);
