@@ -18,6 +18,7 @@
 		3B55EEC81F14078B0010633A /* FareCompareV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55EEC71F14078B0010633A /* FareCompareV2Tests.swift */; };
 		3B55EED31F14078B0010633A /* FareCompareV2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55EED21F14078B0010633A /* FareCompareV2UITests.swift */; };
 		7ECC6735CAD3B58F174175E0 /* Pods_FareCompareV2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBDFD56347C148CF1530D82 /* Pods_FareCompareV2Tests.framework */; };
+		E9FA82DA1F1697A900FAE631 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FA82D91F1697A900FAE631 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		920ED5EA8EBBA850B2EB59B7 /* Pods-FareCompareV2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FareCompareV2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FareCompareV2Tests/Pods-FareCompareV2Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D4360A856BD9F4BCAFE16973 /* Pods_FareCompareV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FareCompareV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FC5F3F1A8F4A05357164C2 /* Pods-FareCompareV2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FareCompareV2UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FareCompareV2UITests/Pods-FareCompareV2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		E9FA82D91F1697A900FAE631 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

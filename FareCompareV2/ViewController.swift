@@ -67,6 +67,16 @@ class ViewController: UIViewController {
         button.center = view.center
     }
     
+    func parse(json: JSON)
+    {
+        print("parse called")
+        for ride in json["times"].arrayValue
+        {
+            let estimateDisplayName = ride["display_name"]
+            print(estimateDisplayName)
+        }
+    }
+    
     // Swift
 
     
