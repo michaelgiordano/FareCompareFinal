@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>LyftSDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>ObjectMapper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,17 +42,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0100F41B39A4917184427387A1316A46</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>173A459F33C8BA67463431AE609AFB3F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1DA1A78060757D0A278C44ED42B0AC79</key>
+		<key>4F40CAE898E914D84C2EFD407628DCE5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +52,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F437CFFC3924CAA064593D6D4FBDC60</key>
+		<key>8B2C869C1D1CC53E1F4B85F7AAEEE1A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B4740384F80C5CD0FD36B21F8F67A070</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>CD6C9FB6B052E1CF663F8A56041EA163</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CFC68C5999BFF0E9B562B7DB84DD1A6D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FB36ABF58FC10665CCA6B2B3A2C4398D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

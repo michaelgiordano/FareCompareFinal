@@ -6,6 +6,7 @@ target 'FareCompareV2' do
   use_frameworks!
   pod 'UberRides', :git => 'https://github.com/uber/rides-ios-sdk.git', :branch => 'swift-3-dev'
   pod 'Alamofire', '~> 4.4'
+  pod 'LyftSDK'
 
   # Pods for FareCompareV2
 
@@ -14,6 +15,7 @@ target 'FareCompareV2' do
     # Pods for testing
     pod 'UberRides', :git => 'https://github.com/uber/rides-ios-sdk.git', :branch => 'swift-3-dev'
     pod 'Alamofire', '~> 4.4'
+    pod 'LyftSDK'
     
   end
 
@@ -22,6 +24,7 @@ target 'FareCompareV2' do
     # Pods for testing
     pod 'UberRides', :git => 'https://github.com/uber/rides-ios-sdk.git', :branch => 'swift-3-dev'
     pod 'Alamofire', '~> 4.4'
+    pod 'LyftSDK'
     
   end
 
