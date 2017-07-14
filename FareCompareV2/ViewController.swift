@@ -253,12 +253,18 @@ class ViewController: UIViewController
         
         //BUTTONS --
         let uberButton = RideRequestButton() //ride request button
+        let dropoffLocation = CLLocation(latitude: Double(endLat), longitude: Double(endLong))
+        let builder = RideParametersBuilder().setDropoffLocation(dropoffLocation, nickname: dropoffNickname)
+        button.rideParameters = builder.build()
         uberButton.center = CGPoint(x: view.frame.width/2, y: 365) //position the button
         view.addSubview(uberButton) //put the button in the view
         // --
         let btnLyft = LyftButton() //ride request button
         btnLyft.style = LyftButtonStyle.hotPink //making the button pink
         btnLyft.center = CGPoint(x: view.frame.width/2, y: 607) //position the button
+        let pickup = CLLocationCoordinate2D(latitude: startLat, longitude: startLong)
+        let destination = CLLocationCoordinate2D(latitude: endLat, longitude: endLong)
+        btnLyft.configure(rideKind: LyftSDK.RideKind.Standard, pickup: pickup, destination: destination)
         view.addSubview(btnLyft) //put the button in the view
         btnLyft.layer.cornerRadius = 9 //rounding button
         btnLyft.clipsToBounds = true //clipping the rounded corners
@@ -279,11 +285,17 @@ class ViewController: UIViewController
         print("Partial Refresh: \(sender)")
         if sender == "pickup"
         {
-            pickupLabel.setTitle(pickupNickname,for: .normal)
+            if pickupNickname != ""
+            {
+                pickupLabel.setTitle(pickupNickname,for: .normal)
+            }
         }
         else if sender == "dropoff"
         {
+            if dropoffNickname != ""
+            {
             dropoffLabel.setTitle(dropoffNickname,for: .normal)
+            }
         }
     }
     
@@ -327,21 +339,4 @@ class ViewController: UIViewController
         }
     }
     
-    /*
-    @IBAction func onPickupButtonTapped(_ sender: Any)
-    {
-        print("pickup")
-        theSender = "pickup"
-        print("the sender set to: \(theSender)")
-        self.performSegue(withIdentifier: "pickup", sender: nil)
-    }
-    
-    @IBAction func onDropoffButtonTapped(_ sender: Any)
-    {
-        print("dropoff")
-        theSender = "dropoff"
-        print("the sender set to: \(theSender)")
-        self.performSegue(withIdentifier: "dropoff", sender: nil)
-    }
-    */
 }
