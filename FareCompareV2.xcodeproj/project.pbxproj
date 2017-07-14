@@ -18,6 +18,7 @@
 		3B55EEC81F14078B0010633A /* FareCompareV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55EEC71F14078B0010633A /* FareCompareV2Tests.swift */; };
 		3B55EED31F14078B0010633A /* FareCompareV2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55EED21F14078B0010633A /* FareCompareV2UITests.swift */; };
 		3B7896D81F18743B00535BF8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7896D71F18743B00535BF8 /* MapViewController.swift */; };
+		3B7896DA1F18A1FB00535BF8 /* SecondMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7896D91F18A1FB00535BF8 /* SecondMapViewController.swift */; };
 		7ECC6735CAD3B58F174175E0 /* Pods_FareCompareV2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBDFD56347C148CF1530D82 /* Pods_FareCompareV2Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,7 @@
 		3B55EED21F14078B0010633A /* FareCompareV2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FareCompareV2UITests.swift; sourceTree = "<group>"; };
 		3B55EED41F14078B0010633A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B7896D71F18743B00535BF8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3B7896D91F18A1FB00535BF8 /* SecondMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondMapViewController.swift; sourceTree = "<group>"; };
 		49BEA6D18612ABFCA2330803 /* Pods-FareCompareV2Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FareCompareV2Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FareCompareV2Tests/Pods-FareCompareV2Tests.release.xcconfig"; sourceTree = "<group>"; };
 		4D5C4DBC7E16CED263640E89 /* Pods-FareCompareV2UITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FareCompareV2UITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FareCompareV2UITests/Pods-FareCompareV2UITests.debug.xcconfig"; sourceTree = "<group>"; };
 		50C0E19063FCC7485A105C93 /* Pods-FareCompareV2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FareCompareV2.release.xcconfig"; path = "Pods/Target Support Files/Pods-FareCompareV2/Pods-FareCompareV2.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,9 +120,10 @@
 		3B55EEB11F14078B0010633A /* FareCompareV2 */ = {
 			isa = PBXGroup;
 			children = (
-				3B55EEB21F14078B0010633A /* AppDelegate.swift */,
 				3B55EEB41F14078B0010633A /* ViewController.swift */,
 				3B7896D71F18743B00535BF8 /* MapViewController.swift */,
+				3B7896D91F18A1FB00535BF8 /* SecondMapViewController.swift */,
+				3B55EEB21F14078B0010633A /* AppDelegate.swift */,
 				3B55EEB61F14078B0010633A /* Main.storyboard */,
 				3B55EEB91F14078B0010633A /* Assets.xcassets */,
 				3B55EEBB1F14078B0010633A /* LaunchScreen.storyboard */,
@@ -454,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B3C75871F1697990059BBB0 /* SwiftyJSON.swift in Sources */,
+				3B7896DA1F18A1FB00535BF8 /* SecondMapViewController.swift in Sources */,
 				3B55EEB51F14078B0010633A /* ViewController.swift in Sources */,
 				3B55EEB31F14078B0010633A /* AppDelegate.swift in Sources */,
 				3B7896D81F18743B00535BF8 /* MapViewController.swift in Sources */,

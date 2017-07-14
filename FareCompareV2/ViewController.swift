@@ -29,26 +29,47 @@ class ViewController: UIViewController
     var uberXPrice = "" //string with $ and -
     var lyftTime = ""
     var lyftPrice = ""
-    var startLat = 37.7752315
-    var startLong = -122.418075
-    var endLat = 37.7752415
-    var endLong = -122.518075
+    var startLat = 0.00
+    var startLong = 0.00
+    var endLat = 0.00
+    var endLong = 0.00
     var pickupNickname = ""
     var dropoffNickname = ""
-
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         print("View Did Load")
-        //button.delegate = self
-        
-        refresh()
+        if startLat == 0.00 || startLong == 0.00 || endLat == 0.00 || endLong == 0.00 || pickupNickname == "" || dropoffNickname == ""
+        {
+            print("not enough params to refesh")
+        }
+        else
+        {
+            print("calling refresh from view did load")
+            refresh()
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(false)
+        print("View Did Appear")
+        if startLat == 0.00 || startLong == 0.00 || endLat == 0.00 || endLong == 0.00 || pickupNickname == "" || dropoffNickname == ""
+        {
+            print("not enough params to refesh")
+            print("\(startLat), \(startLong), \(endLat), \(endLong), \(pickupNickname), \(dropoffNickname)")
+        }
+        else
+        {
+            print("calling refresh from view did load")
+            refresh()
+        }
     }
     
     func createAccessToken()
     {
-        //Creating access token -------------------------------------------------------------------------------
+        //Creating access token --
         let user = "Mdlycve9fovu"
         let password = "71nh2vP-aQwVzR4inI8b_dD6TSWucgei"
         
@@ -62,8 +83,7 @@ class ViewController: UIViewController
                 self.parseLyft(json: JSON(response.result.value!))
         }
     }
-        //-----------------------------------------------------------------------------------------------------
-        
+    
     func parseLyft(json: JSON) //future for getting new access tokens
     {
         let token = json["access_token"]
@@ -71,13 +91,12 @@ class ViewController: UIViewController
         //   print(token)
     }
     
-    //-----------------------------------------------------------------------------------------------------
-    
     // Getting Lyft ride price based on arrival and destinaton
-    
     func getLyftRidePrice(start_lat: Double, start_lng: Double, end_lat: Double, end_lng: Double)
     {
-        let token:JSON = "soZ8CE76+NKofh/+kzw8U7NIhR4oRnfqE6omFN5gXhUr6JG5oreA1NOvnCaugYT5CYcXWuj5d3GOs3znlD9MdOCeO0GWwE/nuRH3z2k9ehDVrgq4v7rT3y0="
+        
+        print("getLyftRidePrice called")
+        let token:JSON = "X5WSfbfolelV1F7pZ7afjVLinmQJdiC/fw8TqeoyM3dsXXguLYHabhMjb9LJF04ZE4GDeadH2LduYy80xGP9dAHYyP50yJ0zD1GjdAeltrJHMqHodDxlKUQ="
         let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(token)"]
         let paramsRequest: Parameters = ["start_lat": start_lat,
                                          "start_lng": start_lng,
@@ -88,12 +107,13 @@ class ViewController: UIViewController
                           parameters: paramsRequest,
                           encoding: URLEncoding(destination: .queryString),
                           headers: headerRequest).validate().responseJSON { response in
-                            self.helperLyftPrice(json: JSON(response.result.value!))
+                            print("JUST BEFORE")
+                            self.helperLyftPrice(json: JSON(response.result.value as Any))
+                            print("JUST AFTER")
         }
     }
     
     // Helper method (setting labels)
-    
     func helperLyftPrice(json :JSON)
     {
         for part in json["cost_estimates"].arrayValue
@@ -106,10 +126,9 @@ class ViewController: UIViewController
     }
     
     // Getting amount of time for the driver to get to the passenger
-    
     func getLyftETA(start_lat: Double, start_lng: Double, end_lat: Double, end_lng: Double)
     {
-        let token:JSON = "soZ8CE76+NKofh/+kzw8U7NIhR4oRnfqE6omFN5gXhUr6JG5oreA1NOvnCaugYT5CYcXWuj5d3GOs3znlD9MdOCeO0GWwE/nuRH3z2k9ehDVrgq4v7rT3y0="
+        let token:JSON = "X5WSfbfolelV1F7pZ7afjVLinmQJdiC/fw8TqeoyM3dsXXguLYHabhMjb9LJF04ZE4GDeadH2LduYy80xGP9dAHYyP50yJ0zD1GjdAeltrJHMqHodDxlKUQ="
         let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(token)"]
         let paramsRequest: Parameters = ["lat": start_lat,
                                          "lng": start_lng,
@@ -125,7 +144,6 @@ class ViewController: UIViewController
     }
     
     // Helper method (setting labels)
-    
     func helperLyftETA(json :JSON)
     {
         for part in json["eta_estimates"].arrayValue
@@ -256,23 +274,74 @@ class ViewController: UIViewController
         }
     }
     
+    func partialRefresh(sender: String)
+    {
+        print("Partial Refresh: \(sender)")
+        if sender == "pickup"
+        {
+            pickupLabel.setTitle(pickupNickname,for: .normal)
+        }
+        else if sender == "dropoff"
+        {
+            dropoffLabel.setTitle(dropoffNickname,for: .normal)
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
-        let dvc = segue.destination as! MapViewController
-        dvc.sender = self.theSender
     }
     
     @IBAction func unwindToInitialViewController(segue: UIStoryboardSegue)
     {
+        if let sourceViewController = segue.source as? MapViewController
+        {
+            print("Segue Source Title: \(sourceViewController.theSource)")
+            if (sourceViewController.theSource) == "pickup"
+            {
+                print("unwinding")
+                theSender = "pickup"
+                pickupNickname = (sourceViewController.nickname)
+                startLat = (sourceViewController.lat)
+                startLong = (sourceViewController.long)
+                print("pickup params passed back")
+                partialRefresh(sender: theSender)
+            }
+        }
+        else if let sourceViewController = segue.source as? SecondMapViewController
+        {
+            print("Segue Source Title: \(sourceViewController.theSource)")
+            if (sourceViewController.theSource) == "dropoff"
+            {
+                print("unwinding")
+                theSender = "dropoff"
+                dropoffNickname = (sourceViewController.nickname)
+                endLat = (sourceViewController.lat)
+                endLong = (sourceViewController.long)
+                print("dropoff params passed back")
+                partialRefresh(sender: theSender)
+            }
+        }
+        else
+        {
+            print("ERROR: failed to recognize view controller identifier")
+        }
     }
     
+    /*
     @IBAction func onPickupButtonTapped(_ sender: Any)
     {
+        print("pickup")
         theSender = "pickup"
+        print("the sender set to: \(theSender)")
+        self.performSegue(withIdentifier: "pickup", sender: nil)
     }
     
     @IBAction func onDropoffButtonTapped(_ sender: Any)
     {
+        print("dropoff")
         theSender = "dropoff"
+        print("the sender set to: \(theSender)")
+        self.performSegue(withIdentifier: "dropoff", sender: nil)
     }
+    */
 }

@@ -1,5 +1,5 @@
 //
-//  MapViewController.swift
+//  SecondMapViewController.swift
 //  FareCompareV2
 //
 //  Created by hello on 10/7/2017.
@@ -9,11 +9,11 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController, UISearchBarDelegate
+class SecondMapViewController: UIViewController, UISearchBarDelegate
 {
     @IBOutlet weak var mapView: MKMapView!
     
-    let theSource = "pickup"
+    let theSource = "dropoff"
     var lat = 0.00
     var long = 0.00
     var nickname = ""
