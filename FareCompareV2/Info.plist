@@ -18,6 +18,11 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>uber</string>
+		<string>uberauth</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -28,33 +33,24 @@
 	<array>
 		<string>armv7</string>
 	</array>
-    
-    
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>uber</string>
-        <string>uberauth</string>
-    </array>
-    <key>UberClientID</key>
-    <string>C1hQRMfPG-gzzlSCQhxcRhbUPsph59GU</string>
-    <key>UberServerToken</key>
-    <string>PxtTExlVkXCfJcsrCsCagaLvQs6j54LLm-UZrVMR</string>
-    <key>UberDisplayName</key>
-    <string>FareCompare</string>
-    <key>UberCallbackURIs</key>
-    <array>
-        <dict>
-            <key>UberCallbackURIType</key>
-            <string>General</string>
-            <key>URIString</key>
-            <string>localhost</string>
-        </dict>
-    </array>
+	<key>UberCallbackURIs</key>
+	<array>
+		<dict>
+			<key>URIString</key>
+			<string>localhost</string>
+			<key>UberCallbackURIType</key>
+			<string>General</string>
+		</dict>
+	</array>
+	<key>UberClientID</key>
+	<string>C1hQRMfPG-gzzlSCQhxcRhbUPsph59GU</string>
+	<key>UberDisplayName</key>
+	<string>FareCompare</string>
+	<key>UberServerToken</key>
+	<string>PxtTExlVkXCfJcsrCsCagaLvQs6j54LLm-UZrVMR</string>
 </dict>
 </plist>
