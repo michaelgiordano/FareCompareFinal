@@ -14,7 +14,6 @@ import LyftSDK
 
 class ViewController: UIViewController
 {
-    
     @IBOutlet weak var uberPriceLabel: UILabel!
     @IBOutlet weak var uberTimeLabel: UILabel!
     @IBOutlet weak var lyftPriceLabel: UILabel!
@@ -63,7 +62,7 @@ class ViewController: UIViewController
         }
         else
         {
-            print("calling refresh from view did load")
+            print("calling refresh from view did appear")
             refresh()
         }
     }
@@ -108,8 +107,6 @@ class ViewController: UIViewController
     // Getting Lyft ride price based on arrival and destinaton
     func getLyftRidePrice(start_lat: Double, start_lng: Double, end_lat: Double, end_lng: Double)
     {
-        
-        print("getLyftRidePrice called")
         let token:JSON = "/UU/LnAYqmMYALaXg5HEghKoCD/GZlduLXMCZ+AFUGw7o4p/9+6aHzNpK0BPyekxvsS1h+n1N7xLlHhe6z22zuuJeDs2y6cwDh/X7HfXvxAWt6cQZaY2N9A="
         let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(token)"]
         let paramsRequest: Parameters = ["start_lat": start_lat,
@@ -121,9 +118,7 @@ class ViewController: UIViewController
                           parameters: paramsRequest,
                           encoding: URLEncoding(destination: .queryString),
                           headers: headerRequest).validate().responseJSON { response in
-                            print("JUST BEFORE")
                             self.helperLyftPrice(json: JSON(response.result.value as Any))
-                            print("JUST AFTER")
         }
     }
     
@@ -136,6 +131,7 @@ class ViewController: UIViewController
             let max = part["estimated_cost_cents_max"].int!
             lyftPrice = "Price: $\(min/100)-$\(max/100)"
             lyftPriceLabel.text = lyftPrice
+            print("Lyft \(lyftPrice)")
         }
     }
     
@@ -165,6 +161,7 @@ class ViewController: UIViewController
             let eta = part["eta_seconds"].int! / 60
             lyftTime = "Time: \(eta) mins"
             lyftTimeLabel.text = lyftTime
+            print("Lyft \(lyftTime)")
         }
     }
 
@@ -233,7 +230,7 @@ class ViewController: UIViewController
                 }
             }
         }
-        print("uberXTime: \(uberXTime)")
+        print("uberXTime: \(uberXTime) mins")
     }
     
     func uberParsePrice(json: JSON) // (called by func uberCallPrice) parses json file from uber price call, picks out price as string, sets global var uberXPrice
@@ -353,3 +350,4 @@ class ViewController: UIViewController
         }
     }
 }
+
