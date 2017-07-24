@@ -14,6 +14,7 @@ import LyftSDK
 
 class ViewController: UIViewController
 {
+    
     @IBOutlet weak var uberPriceLabel: UILabel!
     @IBOutlet weak var uberTimeLabel: UILabel!
     @IBOutlet weak var lyftPriceLabel: UILabel!
@@ -34,7 +35,7 @@ class ViewController: UIViewController
     var endLong = 0.00
     var pickupNickname = ""
     var dropoffNickname = ""
-    var lyftBearerToken = "" //Lyft bearer token set by create access token as type "String"
+    var lyftToken:JSON = "xe31mbjuCcW44VqEzddkYedb9+xZHMKAv4lxD6qvbLSpGy41Tpnosbrq56yZAwfQf1Nw1yR9FFhrar3GwlGxxiIKLSNpQAunAPRh6/ia+JW08UJCTOb1MOs=x"
     
     override func viewDidLoad()
     {
@@ -62,16 +63,14 @@ class ViewController: UIViewController
         }
         else
         {
-            print("calling refresh from view did appear")
+            print("calling refresh from view did load")
             refresh()
         }
     }
     
-    // LYFT METHODS --
-    
-    func createAccessToken() //creates new lyft access (bearer) token -- each only lasts 1 day
+    func createNewLyftAccessToken()
     {
-        //Creating lyft access token --
+        //Creating access token --
         let user = "Mdlycve9fovu"
         let password = "71nh2vP-aQwVzR4inI8b_dD6TSWucgei"
         
@@ -79,50 +78,51 @@ class ViewController: UIViewController
         let paramsLyft: Parameters = ["grant_type" : "client_credentials",
                                       "scope" : "public"]
         
-        Alamofire.request("https://api.lyft.com/oauth/token", parameters: paramsLyft, encoding: JSONEncoding.default, headers: headersLyft).authenticate(user: user, password: password)
+        Alamofire.request("https://api.lyft.com/oauth/token", method: .post, parameters: paramsLyft, encoding: JSONEncoding.default, headers: headersLyft).authenticate(user: user, password: password)
             .responseJSON { response in
-                print("Response request: \(response.result)")
-                print("OAuth Token: \(response.result.value)")
-                self.parseLyft(json: JSON(response.result.value!))
+                self.parseLyft(json: JSON(response.result.value))
         }
-        /*
-         
-         This function does not work for some reason, so paste this into terminal instead and then set global var 'lyftBearerToken' to the response you get:
-         
-         curl -X POST -H "Content-Type: application/json" \
-         --user "Mdlycve9fovu:71nh2vP-aQwVzR4inI8b_dD6TSWucgei" \
-         -d '{"grant_type": "client_credentials", "scope": "public"}' \
-         'https://api.lyft.com/oauth/token'
-         
-         */
     }
     
-    func parseLyft(json: JSON) //to be used with create AccessToken() in future for getting new lyft access tokens (every 24 hrs)
+    func parseLyft(json: JSON) //Sets old access token to new access token generated
     {
-        let token = json["access_token"]
-        lyftBearerToken = "\(token)"
-        //print(token)
+        lyftToken = json["access_token"]
     }
     
     // Getting Lyft ride price based on arrival and destinaton
     func getLyftRidePrice(start_lat: Double, start_lng: Double, end_lat: Double, end_lng: Double)
     {
-        let token:JSON = "/UU/LnAYqmMYALaXg5HEghKoCD/GZlduLXMCZ+AFUGw7o4p/9+6aHzNpK0BPyekxvsS1h+n1N7xLlHhe6z22zuuJeDs2y6cwDh/X7HfXvxAWt6cQZaY2N9A="
-        let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(token)"]
+        
+        print("getLyftRidePrice called")
+        
+        let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(lyftToken)"]
         let paramsRequest: Parameters = ["start_lat": start_lat,
                                          "start_lng": start_lng,
                                          "end_lat": end_lat,
                                          "end_lng": end_lng,
                                          "ride_type": "lyft"]
-        Alamofire.request("https://api.lyft.com/v1/cost",
-                          parameters: paramsRequest,
-                          encoding: URLEncoding(destination: .queryString),
-                          headers: headerRequest).validate().responseJSON { response in
-                            self.helperLyftPrice(json: JSON(response.result.value as Any))
+        do {
+            Alamofire.request("https://api.lyft.com/v1/cost",
+                              parameters: paramsRequest,
+                              encoding: URLEncoding(destination: .queryString),
+                              headers: headerRequest).validate().responseJSON { response in
+                                self.helperLyftPrice(json: JSON(response.result.value as Any))
+            }
+        }
+        catch {
+            print("invalid access token")
+            self.createNewLyftAccessToken()
+            Alamofire.request("https://api.lyft.com/v1/cost",
+                              parameters: paramsRequest,
+                              encoding: URLEncoding(destination: .queryString),
+                              headers: headerRequest).validate().responseJSON { response in
+                                self.helperLyftPrice(json: JSON(response.result.value as Any))
+            }
         }
     }
     
-    // Helper method for lyft price(setting labels)
+    
+    // Helper method (setting labels)
     func helperLyftPrice(json :JSON)
     {
         for part in json["cost_estimates"].arrayValue
@@ -131,29 +131,39 @@ class ViewController: UIViewController
             let max = part["estimated_cost_cents_max"].int!
             lyftPrice = "Price: $\(min/100)-$\(max/100)"
             lyftPriceLabel.text = lyftPrice
-            print("Lyft \(lyftPrice)")
         }
     }
     
     // Getting amount of time for the driver to get to the passenger
     func getLyftETA(start_lat: Double, start_lng: Double, end_lat: Double, end_lng: Double)
     {
-        let token:JSON = "/UU/LnAYqmMYALaXg5HEghKoCD/GZlduLXMCZ+AFUGw7o4p/9+6aHzNpK0BPyekxvsS1h+n1N7xLlHhe6z22zuuJeDs2y6cwDh/X7HfXvxAWt6cQZaY2N9A="
-        let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(token)"]
+        let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(lyftToken)"]
         let paramsRequest: Parameters = ["lat": start_lat,
                                          "lng": start_lng,
                                          "destination_lat": end_lat,
                                          "destination_lng": end_lng,
                                          "ride_type": "lyft"]
-        Alamofire.request("https://api.lyft.com/v1/eta",
-                          parameters: paramsRequest,
-                          encoding: URLEncoding(destination: .queryString),
-                          headers: headerRequest).validate().responseJSON { response in
-                            self.helperLyftETA(json: JSON(response.result.value!))
+        do {
+            Alamofire.request("https://api.lyft.com/v1/eta",
+                              parameters: paramsRequest,
+                              encoding: URLEncoding(destination: .queryString),
+                              headers: headerRequest).validate().responseJSON { response in
+                                self.helperLyftETA(json: JSON(response.result.value!))
+            }
+        }
+        catch {
+            print("invalid access token")
+            self.createNewLyftAccessToken()
+            Alamofire.request("https://api.lyft.com/v1/eta",
+                              parameters: paramsRequest,
+                              encoding: URLEncoding(destination: .queryString),
+                              headers: headerRequest).validate().responseJSON { response in
+                                self.helperLyftETA(json: JSON(response.result.value!))
+            }
         }
     }
     
-    // Helper method for lyft eta(setting labels)
+    // Helper method (setting labels)
     func helperLyftETA(json :JSON)
     {
         for part in json["eta_estimates"].arrayValue
@@ -161,7 +171,6 @@ class ViewController: UIViewController
             let eta = part["eta_seconds"].int! / 60
             lyftTime = "Time: \(eta) mins"
             lyftTimeLabel.text = lyftTime
-            print("Lyft \(lyftTime)")
         }
     }
     
@@ -170,16 +179,16 @@ class ViewController: UIViewController
     func uberCallTime(startLat: Double, startLong: Double) //Uber call for time
     {
         let parameters: Parameters =
-        [
-            "start_latitude": "\(startLat)",
-            "start_longitude": "\(startLong)",
+            [
+                "start_latitude": "\(startLat)",
+                "start_longitude": "\(startLong)",
         ]
         let headers: HTTPHeaders =
-        [
-            "Authorization": "Token 4Z9MYJoZ1qKF914OfBqT1Js-kHUl9p9qekDE2h2e",
-            "Accept-Language": "en_US",
-            "Content-Type" : "application/json",
-        ]
+            [
+                "Authorization": "Token 4Z9MYJoZ1qKF914OfBqT1Js-kHUl9p9qekDE2h2e",
+                "Accept-Language": "en_US",
+                "Content-Type" : "application/json",
+                ]
         _ = Alamofire.request("https://api.uber.com/v1.2/estimates/time",
                               parameters: parameters,
                               encoding: URLEncoding(destination: .queryString),
@@ -191,18 +200,18 @@ class ViewController: UIViewController
     func uberCallPrice(startLat: Double, startLong: Double, endLat: Double, endLong: Double) //Uber call for price
     {
         let parameters: Parameters =
-        [
-            "start_latitude": "\(startLat)",
-            "start_longitude": "\(startLong)",
-            "end_latitude": "\(endLat)",
-            "end_longitude": "\(endLong)",
+            [
+                "start_latitude": "\(startLat)",
+                "start_longitude": "\(startLong)",
+                "end_latitude": "\(endLat)",
+                "end_longitude": "\(endLong)",
         ]
         let headers: HTTPHeaders =
-        [
-            "Authorization": "Token 4Z9MYJoZ1qKF914OfBqT1Js-kHUl9p9qekDE2h2e",
-            "Accept-Language": "en_US",
-            "Content-Type" : "application/json",
-        ]
+            [
+                "Authorization": "Token 4Z9MYJoZ1qKF914OfBqT1Js-kHUl9p9qekDE2h2e",
+                "Accept-Language": "en_US",
+                "Content-Type" : "application/json",
+                ]
         _ = Alamofire.request("https://api.uber.com/v1.2/estimates/price",
                               parameters: parameters,
                               encoding: URLEncoding(destination: .queryString),
@@ -230,7 +239,7 @@ class ViewController: UIViewController
                 }
             }
         }
-        print("uberXTime: \(uberXTime) mins")
+        print("uberXTime: \(uberXTime)")
     }
     
     func uberParsePrice(json: JSON) // (called by func uberCallPrice) parses json file from uber price call, picks out price as string, sets global var uberXPrice
@@ -251,7 +260,7 @@ class ViewController: UIViewController
         print("uberXPrice: \(uberXPrice)")
     }
     
-    func refresh() //refreshes the whole screen, lyft and uber ride prices, times, and buttons as well as location nicknames of both locations
+    func refresh()
     {
         print("Refresh")
         //LYFT --
@@ -291,7 +300,7 @@ class ViewController: UIViewController
         }
     }
     
-    func partialRefresh(sender: String) //refreshes the nickname of the given location when one location is inputted
+    func partialRefresh(sender: String)
     {
         print("Partial Refresh: \(sender)")
         if sender == "pickup"
@@ -310,34 +319,34 @@ class ViewController: UIViewController
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) //runs segues from view controller to map and second map view controllers
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
     }
     
-    @IBAction func unwindToInitialViewController(segue: UIStoryboardSegue) //gets data back from map view controllers
+    @IBAction func unwindToInitialViewController(segue: UIStoryboardSegue)
     {
-        if let sourceViewController = segue.source as? MapViewController //checks if segue is from MapViewController
+        if let sourceViewController = segue.source as? MapViewController
         {
             print("Segue Source Title: \(sourceViewController.theSource)")
-            if (sourceViewController.theSource) == "pickup" //confirms the source inside the view contrller
+            if (sourceViewController.theSource) == "pickup"
             {
                 print("unwinding")
-                theSender = "pickup" //sets the global sender var in ViewController so that partialRefresh() will know what to resfresh
-                pickupNickname = (sourceViewController.nickname) //get all the data:
+                theSender = "pickup"
+                pickupNickname = (sourceViewController.nickname)
                 startLat = (sourceViewController.lat)
                 startLong = (sourceViewController.long)
                 print("pickup params passed back")
                 partialRefresh(sender: theSender)
             }
         }
-        else if let sourceViewController = segue.source as? SecondMapViewController //checks if segue is from SecondMapViewController
+        else if let sourceViewController = segue.source as? SecondMapViewController
         {
             print("Segue Source Title: \(sourceViewController.theSource)")
-            if (sourceViewController.theSource) == "dropoff" //confirms the source inside the view contrller
+            if (sourceViewController.theSource) == "dropoff"
             {
                 print("unwinding")
-                theSender = "dropoff" //sets the global sender var in ViewController so that partialRefresh() will know what to resfresh
-                dropoffNickname = (sourceViewController.nickname) //get all the data:
+                theSender = "dropoff"
+                dropoffNickname = (sourceViewController.nickname)
                 endLat = (sourceViewController.lat)
                 endLong = (sourceViewController.long)
                 print("dropoff params passed back")
@@ -346,8 +355,8 @@ class ViewController: UIViewController
         }
         else
         {
-            print("ERROR: failed to recognize view controller identifier") //print error if segue source doesn't match either map view controller
+            print("ERROR: failed to recognize view controller identifier")
         }
     }
+    
 }
-
