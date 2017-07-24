@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1A7A4B4565215AD5423265C6 /* Pods_FareCompareV2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DE02A92F89FDB7E85549C68 /* Pods_FareCompareV2UITests.framework */; };
 		3043EF5DCE0A76502DC0E654 /* Pods_FareCompareV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4360A856BD9F4BCAFE16973 /* Pods_FareCompareV2.framework */; };
-		3B3C75871F1697990059BBB0 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B3C75861F1697990059BBB0 /* SwiftyJSON.swift */; };
 		3B55EEB31F14078B0010633A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55EEB21F14078B0010633A /* AppDelegate.swift */; };
 		3B55EEB51F14078B0010633A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B55EEB41F14078B0010633A /* ViewController.swift */; };
 		3B55EEB81F14078B0010633A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B55EEB61F14078B0010633A /* Main.storyboard */; };
@@ -40,6 +39,7 @@
 		3B7897021F18C04A00535BF8 /* Icon-App-76x76@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7896EE1F18C04A00535BF8 /* Icon-App-76x76@3x.png */; };
 		3B7897031F18C04A00535BF8 /* Icon-App-83.5x83.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7896EF1F18C04A00535BF8 /* Icon-App-83.5x83.5@2x.png */; };
 		7ECC6735CAD3B58F174175E0 /* Pods_FareCompareV2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DBDFD56347C148CF1530D82 /* Pods_FareCompareV2Tests.framework */; };
+		E91C340F1F18C3E400382AAE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91C340E1F18C3E400382AAE /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +61,6 @@
 
 /* Begin PBXFileReference section */
 		2DBDFD56347C148CF1530D82 /* Pods_FareCompareV2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FareCompareV2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3B3C75861F1697990059BBB0 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../../Downloads/SwiftyJSON-master/Source/SwiftyJSON.swift"; sourceTree = "<group>"; };
 		3B55EEAF1F14078B0010633A /* FareCompareV2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FareCompareV2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B55EEB21F14078B0010633A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3B55EEB41F14078B0010633A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +104,7 @@
 		920ED5EA8EBBA850B2EB59B7 /* Pods-FareCompareV2Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FareCompareV2Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FareCompareV2Tests/Pods-FareCompareV2Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D4360A856BD9F4BCAFE16973 /* Pods_FareCompareV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FareCompareV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3FC5F3F1A8F4A05357164C2 /* Pods-FareCompareV2UITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FareCompareV2UITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FareCompareV2UITests/Pods-FareCompareV2UITests.release.xcconfig"; sourceTree = "<group>"; };
+		E91C340E1F18C3E400382AAE /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,7 +168,7 @@
 				3B55EEB91F14078B0010633A /* Assets.xcassets */,
 				3B55EEBB1F14078B0010633A /* LaunchScreen.storyboard */,
 				3B55EEBE1F14078B0010633A /* Info.plist */,
-				3B3C75861F1697990059BBB0 /* SwiftyJSON.swift */,
+				E91C340E1F18C3E400382AAE /* SwiftyJSON.swift */,
 				3B7896DB1F18C04A00535BF8 /* AppIcon.appiconset */,
 			);
 			path = FareCompareV2;
@@ -319,7 +319,7 @@
 				TargetAttributes = {
 					3B55EEAE1F14078B0010633A = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = B5GSG3QT4C;
+						DevelopmentTeam = K47CUGM2AK;
 						ProvisioningStyle = Automatic;
 					};
 					3B55EEC21F14078B0010633A = {
@@ -544,10 +544,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B3C75871F1697990059BBB0 /* SwiftyJSON.swift in Sources */,
 				3B7896DA1F18A1FB00535BF8 /* SecondMapViewController.swift in Sources */,
 				3B55EEB51F14078B0010633A /* ViewController.swift in Sources */,
 				3B55EEB31F14078B0010633A /* AppDelegate.swift in Sources */,
+				E91C340F1F18C3E400382AAE /* SwiftyJSON.swift in Sources */,
 				3B7896D81F18743B00535BF8 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -702,10 +702,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = B5GSG3QT4C;
+				DEVELOPMENT_TEAM = K47CUGM2AK;
 				INFOPLIST_FILE = FareCompareV2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cipher.FareCompareV2.something;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cipher.FareCompareV2.somethingNewest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -718,10 +718,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = B5GSG3QT4C;
+				DEVELOPMENT_TEAM = K47CUGM2AK;
 				INFOPLIST_FILE = FareCompareV2/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.cipher.FareCompareV2.something;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cipher.FareCompareV2.somethingNewest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;

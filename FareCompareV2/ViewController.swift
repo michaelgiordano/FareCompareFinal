@@ -170,16 +170,16 @@ class ViewController: UIViewController
     func uberCallTime(startLat: Double, startLong: Double) //Uber call for time
     {
         let parameters: Parameters =
-            [
-                "start_latitude": "\(startLat)",
-                "start_longitude": "\(startLong)",
+        [
+            "start_latitude": "\(startLat)",
+            "start_longitude": "\(startLong)",
         ]
         let headers: HTTPHeaders =
-            [
-                "Authorization": "Token 4Z9MYJoZ1qKF914OfBqT1Js-kHUl9p9qekDE2h2e",
-                "Accept-Language": "en_US",
-                "Content-Type" : "application/json",
-                ]
+        [
+            "Authorization": "Token 4Z9MYJoZ1qKF914OfBqT1Js-kHUl9p9qekDE2h2e",
+            "Accept-Language": "en_US",
+            "Content-Type" : "application/json",
+        ]
         _ = Alamofire.request("https://api.uber.com/v1.2/estimates/time",
                               parameters: parameters,
                               encoding: URLEncoding(destination: .queryString),
@@ -191,18 +191,18 @@ class ViewController: UIViewController
     func uberCallPrice(startLat: Double, startLong: Double, endLat: Double, endLong: Double) //Uber call for price
     {
         let parameters: Parameters =
-            [
-                "start_latitude": "\(startLat)",
-                "start_longitude": "\(startLong)",
-                "end_latitude": "\(endLat)",
-                "end_longitude": "\(endLong)",
+        [
+            "start_latitude": "\(startLat)",
+            "start_longitude": "\(startLong)",
+            "end_latitude": "\(endLat)",
+            "end_longitude": "\(endLong)",
         ]
         let headers: HTTPHeaders =
-            [
-                "Authorization": "Token 4Z9MYJoZ1qKF914OfBqT1Js-kHUl9p9qekDE2h2e",
-                "Accept-Language": "en_US",
-                "Content-Type" : "application/json",
-                ]
+        [
+            "Authorization": "Token 4Z9MYJoZ1qKF914OfBqT1Js-kHUl9p9qekDE2h2e",
+            "Accept-Language": "en_US",
+            "Content-Type" : "application/json",
+        ]
         _ = Alamofire.request("https://api.uber.com/v1.2/estimates/price",
                               parameters: parameters,
                               encoding: URLEncoding(destination: .queryString),

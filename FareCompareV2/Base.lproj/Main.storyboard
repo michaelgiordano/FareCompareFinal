@@ -196,7 +196,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077.5999999999999" y="138.98050974512745"/>
+            <point key="canvasLocation" x="1119" y="139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hMc-kb-xMh">
@@ -214,7 +214,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xXx-Bj-1UO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="265" y="139"/>
+            <point key="canvasLocation" x="295" y="139"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="pN0-3L-LbX">
@@ -268,7 +268,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHJ-VU-fDt" sceneMemberID="firstResponder"/>
                 <exit id="yq1-VW-0p2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1865" y="-169"/>
+            <point key="canvasLocation" x="1865" y="-177"/>
         </scene>
         <!--Second Map View Controller-->
         <scene sceneID="p42-2c-5DZ">
