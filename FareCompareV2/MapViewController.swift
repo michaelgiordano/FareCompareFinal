@@ -13,16 +13,19 @@ class MapViewController: UIViewController, UISearchBarDelegate
 {
     @IBOutlet weak var mapView: MKMapView!
     
+
+    
     let theSource = "pickup"
     var lat = 0.00
     var long = 0.00
     var nickname = ""
     
+
     let locationManager = CLLocationManager()
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)

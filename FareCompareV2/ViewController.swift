@@ -35,6 +35,7 @@ class ViewController: UIViewController
     var endLong = 0.00
     var pickupNickname = ""
     var dropoffNickname = ""
+    var lyftToken:JSON = "xe31mbjuCcW44VqEzddkYedb9+xZHMKAv4lxD6qvbLSpGy41Tpnosbrq56yZAwfQf1Nw1yR9FFhrar3GwlGxxiIKLSNpQAunAPRh6/ia+JW08UJCTOb1MOs=x"
     
     override func viewDidLoad()
     {
@@ -67,7 +68,7 @@ class ViewController: UIViewController
         }
     }
     
-    func createAccessToken()
+    func createNewLyftAccessToken()
     {
         //Creating access token --
         let user = "Mdlycve9fovu"
@@ -77,18 +78,15 @@ class ViewController: UIViewController
         let paramsLyft: Parameters = ["grant_type" : "client_credentials",
                                       "scope" : "public"]
         
-        Alamofire.request("https://api.lyft.com/oauth/token", parameters: paramsLyft, encoding: JSONEncoding.default, headers: headersLyft).authenticate(user: user, password: password)
+        Alamofire.request("https://api.lyft.com/oauth/token", method: .post, parameters: paramsLyft, encoding: JSONEncoding.default, headers: headersLyft).authenticate(user: user, password: password)
             .responseJSON { response in
-                //    print("OAuth Token: \(response.result.value)")
-                self.parseLyft(json: JSON(response.result.value!))
+                self.parseLyft(json: JSON(response.result.value))
         }
     }
     
-    func parseLyft(json: JSON) //future for getting new access tokens
+    func parseLyft(json: JSON) //Sets old access token to new access token generated
     {
-        let token = json["access_token"]
-        // self.token = token
-        //   print(token)
+        lyftToken = json["access_token"]
     }
     
     // Getting Lyft ride price based on arrival and destinaton
@@ -96,22 +94,33 @@ class ViewController: UIViewController
     {
         
         print("getLyftRidePrice called")
-        let token:JSON = "X5WSfbfolelV1F7pZ7afjVLinmQJdiC/fw8TqeoyM3dsXXguLYHabhMjb9LJF04ZE4GDeadH2LduYy80xGP9dAHYyP50yJ0zD1GjdAeltrJHMqHodDxlKUQ="
-        let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(token)"]
+        
+        let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(lyftToken)"]
         let paramsRequest: Parameters = ["start_lat": start_lat,
                                          "start_lng": start_lng,
                                          "end_lat": end_lat,
                                          "end_lng": end_lng,
                                          "ride_type": "lyft"]
-        Alamofire.request("https://api.lyft.com/v1/cost",
-                          parameters: paramsRequest,
-                          encoding: URLEncoding(destination: .queryString),
-                          headers: headerRequest).validate().responseJSON { response in
-                            print("JUST BEFORE")
-                            self.helperLyftPrice(json: JSON(response.result.value as Any))
-                            print("JUST AFTER")
+        do {
+            Alamofire.request("https://api.lyft.com/v1/cost",
+                              parameters: paramsRequest,
+                              encoding: URLEncoding(destination: .queryString),
+                              headers: headerRequest).validate().responseJSON { response in
+                                self.helperLyftPrice(json: JSON(response.result.value as Any))
+            }
+        }
+        catch {
+            print("invalid access token")
+            self.createNewLyftAccessToken()
+            Alamofire.request("https://api.lyft.com/v1/cost",
+                              parameters: paramsRequest,
+                              encoding: URLEncoding(destination: .queryString),
+                              headers: headerRequest).validate().responseJSON { response in
+                                self.helperLyftPrice(json: JSON(response.result.value as Any))
         }
     }
+    }
+    
     
     // Helper method (setting labels)
     func helperLyftPrice(json :JSON)
@@ -128,20 +137,31 @@ class ViewController: UIViewController
     // Getting amount of time for the driver to get to the passenger
     func getLyftETA(start_lat: Double, start_lng: Double, end_lat: Double, end_lng: Double)
     {
-        let token:JSON = "X5WSfbfolelV1F7pZ7afjVLinmQJdiC/fw8TqeoyM3dsXXguLYHabhMjb9LJF04ZE4GDeadH2LduYy80xGP9dAHYyP50yJ0zD1GjdAeltrJHMqHodDxlKUQ="
-        let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(token)"]
+        let headerRequest: HTTPHeaders = ["Authorization" : "bearer \(lyftToken)"]
         let paramsRequest: Parameters = ["lat": start_lat,
                                          "lng": start_lng,
                                          "destination_lat": end_lat,
                                          "destination_lng": end_lng,
                                          "ride_type": "lyft"]
-        Alamofire.request("https://api.lyft.com/v1/eta",
-                          parameters: paramsRequest,
-                          encoding: URLEncoding(destination: .queryString),
-                          headers: headerRequest).validate().responseJSON { response in
-                            self.helperLyftETA(json: JSON(response.result.value!))
+        do {
+            Alamofire.request("https://api.lyft.com/v1/eta",
+                              parameters: paramsRequest,
+                              encoding: URLEncoding(destination: .queryString),
+                              headers: headerRequest).validate().responseJSON { response in
+                                self.helperLyftETA(json: JSON(response.result.value!))
+            }
+        }
+        catch {
+            print("invalid access token")
+            self.createNewLyftAccessToken()
+            Alamofire.request("https://api.lyft.com/v1/eta",
+                              parameters: paramsRequest,
+                              encoding: URLEncoding(destination: .queryString),
+                              headers: headerRequest).validate().responseJSON { response in
+                                self.helperLyftETA(json: JSON(response.result.value!))
         }
     }
+        }
     
     // Helper method (setting labels)
     func helperLyftETA(json :JSON)
@@ -153,7 +173,7 @@ class ViewController: UIViewController
             lyftTimeLabel.text = lyftTime
         }
     }
-
+    
     // UBER METHODS --
     
     func uberCallTime(startLat: Double, startLong: Double) //Uber call for time
@@ -294,7 +314,7 @@ class ViewController: UIViewController
         {
             if dropoffNickname != ""
             {
-            dropoffLabel.setTitle(dropoffNickname,for: .normal)
+                dropoffLabel.setTitle(dropoffNickname,for: .normal)
             }
         }
     }
